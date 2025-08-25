@@ -13,8 +13,9 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 class_names = ['Glioma', 'Meningioma', 'NoTumor', 'Pituitary']
 
 # Load models
-yolo_model = YOLO('/home/ciphermind/programing/python/anaconda/jupyter/runs/detect/train5/weights/best.pt')
-class_model = tf.keras.models.load_model('/home/ciphermind/programing/python/anaconda/jupyter/my_full_pre_train_model/brain_tumor_modelv3.keras')
+yolo_model = YOLO('best.pt')
+class_model = tf.keras.models.load_model('brain_tumor_modelv3.keras')
+
 
 
 def preprocess_for_classifier(img, target_size=(224, 224)):
