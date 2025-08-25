@@ -6,12 +6,19 @@ import streamlit as st
 from PIL import Image
 import os
 from collections import Counter
+import gdown
 
 # Disable GPU to avoid CUDA/XLA issues
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 class_names = ['Glioma', 'Meningioma', 'NoTumor', 'Pituitary']
+# Download YOLO model if missing
+if not os.path.exists("best.pt"):
+    gdown.download("https://drive.google.com/uc?id=18lVp6vkgUSvSIB_QFb7dk6LQbmQENcK-", "best.pt", quiet=False)
 
+# Download Keras model if missing
+if not os.path.exists("brain_tumor_modelv3.keras"):
+    gdown.download("https://drive.google.com/uc?id=1BPd4AlbmkMc8QZGYycaQ8Yqz99i_LRzc", "brain_tumor_modelv3.keras", quiet=False)
 # Load models
 yolo_model = YOLO('best.pt')
 class_model = tf.keras.models.load_model('brain_tumor_modelv3.keras')
